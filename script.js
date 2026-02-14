@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const syncNavbarState = () => {
-    const shouldCollapse = window.scrollY > collapseThreshold && desktopMedia.matches;
+    const shouldCollapse =
+      window.scrollY > collapseThreshold && desktopMedia.matches;
 
     if (shouldCollapse) {
       navbar.classList.add("collapsed");
@@ -50,12 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.addEventListener("scroll", function () {
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
-});
+    if (window.scrollY > 50) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
 
   let ticking = false;
   window.addEventListener(
@@ -83,8 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   navbar.addEventListener("mouseleave", () => {
-    clearNavReadyTimer();
-    navbar.classList.remove("expanded", "nav-ready");
+    if (navbar.classList.contains("collapsed") && desktopMedia.matches) {
+      navbar.classList.remove("expanded");
+      navbar.classList.add("nav-ready");
+      navbar.classList.add("scrolled");
+      armNavReadyAfterExpand();
+    }
   });
 
   syncNavbarState();
