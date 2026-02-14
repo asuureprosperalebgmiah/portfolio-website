@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asuure Prosper's Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body class="project-page">
+    <header class="navbar" id="siteNavbar">
+      <div class="nav-container">
+        <a class="logo" href="index.html" aria-label="Go to homepage">
+          <img
+            class="logo-icon"
+            src="./images/nav icon/generated-image_4.png"
+            alt="Asuure Prosper logo"
+          />
+        </a>
+        <nav class="nav-menu" aria-label="Primary navigation">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="projects-main">
+      <section class="projects-hero" aria-labelledby="projects-hero-title">
+        <div class="container projects-hero-inner">
+          <p class="projects-kicker">Portfolio Work</p>
+          <h1 id="projects-hero-title">Projects</h1>
+          <p>
+            A curated collection of engineering-focused builds centered on secure
+            architecture, clean backend logic, and reliable web systems.
+          </p>
+        </div>
+      </section>
+
+      <section class="projects-showcase" aria-labelledby="projects-showcase-title">
+        <div class="container projects-shell">
+          <header class="projects-section-heading">
+            <h2 id="projects-showcase-title">Selected Builds</h2>
+            <p>
+              Each project reflects practical implementation of authentication,
+              persistence, and maintainable full-stack patterns.
+            </p>
+          </header>
+
+          <div class="projects-grid">
+            <article class="project-item">
+              <p class="project-type">Web Security App</p>
+              <h3>Secure Secrets Platform</h3>
+              <p>
+                Built a multi-user secrets platform with a hardened
+                authentication pipeline. Used <strong>PostgreSQL</strong> for
+                relational integrity, <strong>Bcrypt</strong> for salted password
+                hashing, and <strong>Passport.js</strong> for secure
+                session-based login flow with protected routes.
+              </p>
+              <ul class="project-tech-list" aria-label="Tech used">
+                <li class="tech-node">Node.js</li>
+                <li class="tech-express">Express.js</li>
+                <li class="tech-postgres">PostgreSQL</li>
+                <li class="tech-passport">Passport.js</li>
+              </ul>
+              <a href="#" class="project-link">View Code</a>
+            </article>
+
+            <article class="project-item">
+              <p class="project-type">Data Persistence</p>
+              <h3>Permalist Task Manager</h3>
+              <p>
+                Engineered a persistent task management app focused on reliable
+                <strong>CRUD operations</strong> and clean data lifecycle
+                handling. Implemented SQL-backed create, update, and delete
+                logic with structured validation for predictable behavior.
+              </p>
+              <ul class="project-tech-list" aria-label="Tech used">
+                <li class="tech-node">Node.js</li>
+                <li class="tech-postgres">PostgreSQL</li>
+                <li class="tech-ejs">EJS</li>
+                <li class="tech-css3">CSS3</li>
+              </ul>
+              <a href="#" class="project-link">View Code</a>
+            </article>
+
+            <article class="project-item">
+              <p class="project-type">Relational Mapping</p>
+              <h3>Travel Tracker / Family Map</h3>
+              <p>
+                Developed a relational tracking platform that leverages
+                <strong>SQL joins</strong> across connected entities to map user
+                activity accurately. Designed query flows that synchronize
+                shared and user-specific records in a single coherent interface.
+              </p>
+              <ul class="project-tech-list" aria-label="Tech used">
+                <li class="tech-node">Node.js</li>
+                <li class="tech-postgres">PostgreSQL</li>
+                <li class="tech-sql">SQL Joins</li>
+              </ul>
+              <a href="#" class="project-link">View Code</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 Asuure Prosper Alebgmiah. Built with intention.</p>
+      </div>
+    </footer>
+  </body>
+</html>
