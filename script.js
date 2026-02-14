@@ -17,11 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Floating navbar behavior
   const navbar = document.getElementById("siteNavbar");
   if (!navbar) return;
+  const navToggle = navbar.querySelector(".nav-toggle");
+  const navMenu = navbar.querySelector(".nav-menu");
 
   const collapseThreshold = 80;
   const desktopMedia = window.matchMedia("(min-width: 769px)");
+  const hoverCapableMedia = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  );
   const navExpandDurationMs = 350;
   let navReadyTimer;
+
+  const canUseHoverExpansion = () =>
+    desktopMedia.matches && hoverCapableMedia.matches;
 
   const clearNavReadyTimer = () => {
     if (!navReadyTimer) return;
@@ -40,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const syncNavbarState = () => {
     const shouldCollapse =
-      window.scrollY > collapseThreshold && desktopMedia.matches;
+      window.scrollY > collapseThreshold && canUseHoverExpansion();
 
     if (shouldCollapse) {
       navbar.classList.add("collapsed");
@@ -73,22 +81,46 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   desktopMedia.addEventListener("change", syncNavbarState);
+  hoverCapableMedia.addEventListener("change", syncNavbarState);
+
+  if (navToggle && navMenu) {
+    const closeMobileMenu = () => {
+      navbar.classList.remove("mobile-menu-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navbar.classList.toggle("mobile-menu-open");
+      navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMobileMenu();
+    });
+
+    desktopMedia.addEventListener("change", () => {
+      if (desktopMedia.matches) closeMobileMenu();
+    });
+  }
 
   navbar.addEventListener("mouseenter", () => {
-    if (navbar.classList.contains("collapsed") && desktopMedia.matches) {
+    if (navbar.classList.contains("collapsed") && canUseHoverExpansion()) {
       navbar.classList.remove("nav-ready");
-      navbar.classList.remove("scrolled");
       navbar.classList.add("expanded");
+      navbar.classList.remove("scrolled");
       armNavReadyAfterExpand();
     }
   });
 
   navbar.addEventListener("mouseleave", () => {
-    if (navbar.classList.contains("collapsed") && desktopMedia.matches) {
-      navbar.classList.remove("expanded");
-      navbar.classList.add("nav-ready");
+    if (navbar.classList.contains("collapsed") && canUseHoverExpansion()) {
+      clearNavReadyTimer();
+      navbar.classList.remove("expanded", "nav-ready");
       navbar.classList.add("scrolled");
-      armNavReadyAfterExpand();
     }
   });
 

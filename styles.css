@@ -36,8 +36,30 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a,
+button {
+  touch-action: manipulation;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid rgba(209, 231, 255, 0.9);
+  outline-offset: 3px;
+}
+
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   color: var(--text-silver);
   background-color: var(--black-void);
   background:
@@ -50,6 +72,36 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-attachment: fixed;
+}
+
+h1,
+h2,
+h3,
+.nav-links a,
+.btn-primary,
+.projects-kicker,
+.about-kicker,
+.contact-kicker,
+.project-type {
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+}
+
+.project-tech-list li,
+.pill,
+.tech-domain {
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nav-links a,
+.btn-primary {
+  font-weight: 500;
 }
 
 .container {
@@ -73,7 +125,7 @@ body {
 
   width: min(92vw, 1080px);
   height: var(--nav-height);
-  padding: 8px 14px;
+  padding: 8px max(14px, env(safe-area-inset-right)) 8px max(14px, env(safe-area-inset-left));
 
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -167,6 +219,7 @@ body {
   text-decoration: none;
   color: var(--text-muted);
   padding: 8px 14px;
+  min-height: 44px;
   border-radius: 999px;
   border: 1px solid transparent;
   overflow: hidden;
@@ -207,6 +260,26 @@ body {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.16);
   color: var(--text-primary);
+}
+
+.nav-toggle {
+  display: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  padding: 9px 8px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 4px 0;
+  border-radius: 999px;
+  background: #dce6f6;
 }
 
 .navbar.collapsed {
@@ -267,7 +340,7 @@ body {
     width: min(95vw, 680px);
     --nav-height: 64px;
     border-radius: 16px;
-    padding: 7px 10px;
+    padding: 7px max(10px, env(safe-area-inset-right)) 7px max(10px, env(safe-area-inset-left));
   }
 
   .logo-icon {
@@ -280,8 +353,61 @@ body {
   }
 
   .nav-links a {
-    padding: 7px 11px;
+    padding: 8px 11px;
     font-size: 0.9rem;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(8, 10, 14, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.4);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      max-height 0.22s ease;
+  }
+
+  .navbar.mobile-menu-open .nav-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    max-height: 360px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    width: 100%;
+    justify-content: flex-start;
+    border-radius: 10px;
   }
 
   .navbar.collapsed,
@@ -289,7 +415,7 @@ body {
     width: min(95vw, 680px);
     height: var(--nav-height);
     border-radius: 16px;
-    padding: 7px 10px;
+    padding: 7px max(10px, env(safe-area-inset-right)) 7px max(10px, env(safe-area-inset-left));
   }
 
   .navbar.collapsed .nav-container {
@@ -297,10 +423,10 @@ body {
   }
 
   .navbar.collapsed .nav-menu {
-    opacity: 1;
-    max-width: 900px;
-    transform: translateX(0);
-    pointer-events: auto;
+    opacity: 0;
+    max-width: none;
+    transform: translateY(-8px);
+    pointer-events: none;
   }
 
   .navbar.collapsed .logo-icon {
@@ -309,15 +435,119 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  .navbar {
+    top: max(10px, env(safe-area-inset-top));
+    width: min(96vw, 620px);
+  }
+
+  .nav-container {
+    gap: 10px;
+  }
+
+  .nav-links {
+    gap: 0.35rem;
+  }
+
+  .nav-links a {
+    padding: 8px 10px;
+    font-size: 0.86rem;
+  }
+
+  .hero {
+    min-height: 100svh;
+    height: auto;
+    padding: 24px 0;
+  }
+
+  .hero-content {
+    gap: 1.8rem;
+    width: min(94vw, 680px);
+  }
+
+  .hero-subtext {
+    font-size: clamp(0.95rem, 3.4vw, 1.05rem);
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .social-btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .navbar.collapsed .logo-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .nav-links a {
+    padding: 8px 9px;
+    font-size: 0.82rem;
+  }
+
+  .projects-shell,
+  .tech-stack-inner,
+  .core-focus .container {
+    width: min(94vw, 1120px);
+  }
+}
+
+@media (hover: none) {
+  .nav-links a:hover,
+  .btn-primary:hover,
+  .project-item:hover,
+  .tech-card:hover,
+  .toolkit-card:hover,
+  .focus-card:hover,
+  .project-tech-list li:hover,
+  .social-btn:hover {
+    transform: none;
+  }
+
+  .social-btn:hover {
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .hero {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100svh;
+  height: auto;
   position: relative;
-  padding: var(--space-xl) 0;
+  padding: clamp(72px, 10vh, 110px) 0 clamp(28px, 6vh, 64px);
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
+}
+
+/* Prevent fixed navbar from overlapping first hero section on reduced screens */
+body > main > .hero:first-child {
+  padding-top: calc(clamp(92px, 14vh, 132px) + env(safe-area-inset-top));
 }
 .hero::before {
   content: "";
