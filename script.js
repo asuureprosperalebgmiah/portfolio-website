@@ -20,6 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const collapseThreshold = 80;
   const desktopMedia = window.matchMedia("(min-width: 769px)");
+  const navExpandDurationMs = 350;
+  let navReadyTimer;
+
+  const clearNavReadyTimer = () => {
+    if (!navReadyTimer) return;
+    window.clearTimeout(navReadyTimer);
+    navReadyTimer = null;
+  };
+
+  const armNavReadyAfterExpand = () => {
+    clearNavReadyTimer();
+    navReadyTimer = window.setTimeout(() => {
+      if (navbar.classList.contains("expanded")) {
+        navbar.classList.add("nav-ready");
+      }
+    }, navExpandDurationMs);
+  };
 
   const syncNavbarState = () => {
     const shouldCollapse = window.scrollY > collapseThreshold && desktopMedia.matches;
@@ -27,9 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (shouldCollapse) {
       navbar.classList.add("collapsed");
     } else {
-      navbar.classList.remove("collapsed", "expanded");
+      clearNavReadyTimer();
+      navbar.classList.remove("collapsed", "expanded", "nav-ready");
     }
   };
+
+  window.addEventListener("scroll", function () {
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
 
   let ticking = false;
   window.addEventListener(
@@ -49,12 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   navbar.addEventListener("mouseenter", () => {
     if (navbar.classList.contains("collapsed") && desktopMedia.matches) {
+      navbar.classList.remove("nav-ready");
+      navbar.classList.remove("scrolled");
       navbar.classList.add("expanded");
+      armNavReadyAfterExpand();
     }
   });
 
   navbar.addEventListener("mouseleave", () => {
-    navbar.classList.remove("expanded");
+    clearNavReadyTimer();
+    navbar.classList.remove("expanded", "nav-ready");
   });
 
   syncNavbarState();

@@ -125,6 +125,11 @@ body {
     transform 0.3s ease;
 }
 
+/* When navbar is scrolled */
+#siteNavbar.scrolled .logo-icon {
+  content: url("./images/title-icon/generated-image_5.png");
+}
+
 .logo:hover .logo-icon {
   filter:
     drop-shadow(0 0 8px rgba(229, 231, 235, 0.45))
@@ -246,6 +251,14 @@ body {
   max-width: 900px;
   max-height: 100px;
   transform: translateX(0);
+  /*
+    Prevent a split-second hover/click on links while the navbar is still
+    expanding. JS will add `.nav-ready` after the expand transition finishes.
+  */
+  pointer-events: none;
+}
+
+.navbar.expanded.nav-ready .nav-menu {
   pointer-events: auto;
 }
 
