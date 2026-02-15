@@ -10,18 +10,18 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/png" sizes="32x32" href="./images/title-icon/generated-image_5.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/title-icon/generated-image_5.png" />
     <link rel="stylesheet" href="styles.css" />
      <script src="./script.js" defer></script>
   </head>
 
-  <body>
+  <body class="contact-page">
      <header class="navbar" id="siteNavbar">
       <div class="nav-container">
         <a class="logo" href="index.html" aria-label="Go to homepage">
           <img
             class="logo-icon"
-            src="./images/nav-icon/generated-image_4.png"
+            src="./assets/images/nav-icon/generated-image_4.png"
             alt="Asuure Prosper logo"
           />
         </a>
@@ -47,31 +47,39 @@
       </div>
     </header>
 
-    <main>
-      <section class="conect-section hero">
-        <div class="content-wrapper">
-          <h1>Let's Connect</h1>
-        
-        <p>Feel free to reach out for collaborations or just a tech chat!</p>
-        <div class="social-links">
-          <a
-            href="https://www.linkedin.com/in/prosper-alebgmiah-asuure-727830253"
-            target="_blank"
-            class="social-btn linkedin"
-            >LinkedIn</a
-          >
-          <a
-            href="mailto:asuureprosperalebgmiah@gmail.com"
-            target="_blank"
-            class="social-btn email"
-            >Email Me</a
-          >
-          <a
-            href="https://github.com/asuureprosperalebgmiah"
-            target="_blank"
-            class="social-btn github"
-            >Github</a
-          >
+    <main class="contact-main">
+      <section class="contact-hero" aria-labelledby="contact-hero-title">
+        <div class="container contact-hero-inner">
+          <p class="contact-kicker">Connect</p>
+          <h1 id="contact-hero-title">Get In Touch</h1>
+          <p class="contact-subtext">
+            Feel free to reach out for collaborations, cybersecurity discussions,
+            or software engineering opportunities.
+          </p>
+
+          <div class="social-links">
+            <a
+              href="https://www.linkedin.com/in/prosper-alebgmiah-asuure-727830253"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn linkedin"
+              >LinkedIn</a
+            >
+            <a
+              href="mailto:asuureprosperalebgmiah@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn email"
+              >Email Me</a
+            >
+            <a
+              href="https://github.com/asuureprosperalebgmiah"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-btn github"
+              >Github</a
+            >
+          </div>
         </div>
       </section>
     </main>

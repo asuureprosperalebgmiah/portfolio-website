@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const elements = document.querySelectorAll(
-    ".hero, .core-focus, .about-hero, .projects-hero, .about-grid, .projects-showcase",
+    ".hero, .core-focus, .about-hero, .projects-hero, .about-grid, .projects-showcase, .contact-main",
   );
 
   elements.forEach((el) => {
