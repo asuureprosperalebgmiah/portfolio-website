@@ -1242,6 +1242,12 @@ body > main > .hero:first-child {
   text-align: center;
   display: grid;
   gap: 14px;
+  margin: 10px auto auto;
+  padding: 34px 26px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(155deg, rgba(16, 20, 26, 0.94), rgba(8, 10, 15, 0.96));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.3);
 }
 
 .projects-kicker {
