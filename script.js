@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const elements = document.querySelectorAll(".hero, .core-focus");
+  const elements = document.querySelectorAll(
+    ".hero, .core-focus, .about-hero, .projects-hero, .about-grid, .projects-showcase",
+  );
 
   elements.forEach((el) => {
     el.style.opacity = 0;
